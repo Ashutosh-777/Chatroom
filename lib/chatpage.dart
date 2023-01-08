@@ -31,24 +31,36 @@ class _chatpageState extends State<chatpage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title:  Text(widget.name_chatroom_chatpage),
+        backgroundColor: Colors.greenAccent,
+        title:  Center(child: Text(widget.name_chatroom_chatpage)),
       ),
       body: Stack(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height-163,
-            child: StreamBuilder(
-              stream: readmessages(widget.name_chatroom_chatpage),
-                builder: (context,snapshot){
-                if(snapshot.hasError){
-                  print(snapshot.error);
-                  return const Text('Error');
-                }else if(snapshot.hasData){
-                  return build_message(snapshot.data!);
-                }else{
-                  return const Center(child:  CircularProgressIndicator());
-                }
-                }
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage("https://th.bing.com/th/id/R.a5fee14992d17334f98fa2834e736588?rik=l96l6vRXOX7BAA&riu=http%3a%2f%2favante.biz%2fwp-content%2fuploads%2fWhatsapp-wallpaper-ios-7%2fWhatsapp-wallpaper-ios-73.jpg&ehk=l5J4DrjeWrdZ45lqyOJoRfLXq4jFW%2fDLwU5V4cYkxr0%3d&risl=&pid=ImgRaw&r=0"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 75),
+                child: StreamBuilder(
+                  stream: readmessages(widget.name_chatroom_chatpage),
+                    builder: (context,snapshot){
+                    if(snapshot.hasError){
+                      print(snapshot.error);
+                      return const Text('Error');
+                    }else if(snapshot.hasData){
+                      return build_message(snapshot.data!);
+                    }else{
+                      return const Center(child:  CircularProgressIndicator());
+                    }
+                    }
+                ),
+              ),
             ),
           ),
           Align(

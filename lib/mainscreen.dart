@@ -80,6 +80,10 @@ class _mainpageState extends State<mainpage> {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ListTile(
+                                    leading: const Icon(
+                                      color: Colors.black,
+                                      Icons.group,
+                                    ),
                                     onTap: (){
                                       Navigator.push(
                                           context,
