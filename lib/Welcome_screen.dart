@@ -1,6 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:min_id/min_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'mainscreen.dart';
 // void main() async{
@@ -19,8 +17,7 @@ class _welcome_screenState extends State<welcome_screen> {
   final TextEditingController username = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
           body: Padding(
             padding: const EdgeInsets.only(bottom: 160),
             child: Column(
@@ -74,7 +71,7 @@ class _welcome_screenState extends State<welcome_screen> {
                           onPressed: () async{
                           var prefs = await SharedPreferences.getInstance();
                           prefs.setString("username",username.text);
-
+                          if(!mounted) return;
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -98,7 +95,7 @@ class _welcome_screenState extends State<welcome_screen> {
               ],
             ),
           ),
-        ),
-    );
+        );
+
   }
 }
